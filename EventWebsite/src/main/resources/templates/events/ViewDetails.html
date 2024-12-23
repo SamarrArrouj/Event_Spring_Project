@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Détails de l'événement</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/vapor/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container py-5">
+  <!-- Titre principal -->
+  <h1 class="text-center my-4">Event Details</h1>
+
+  <!-- Carte de l'événement -->
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <img th:src="@{'/images/' + ${event.imageFileName}}" class="card-img-top" alt="Image de l'événement">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-3" th:text="${event.title}">Titre de l'événement</h2>
+          <p class="text-muted text-center"><strong>Date :</strong> <span th:text="${#dates.format(event.date, 'dd-MM-yyyy')}">01/01/2024</span></p>
+          <p class="text-muted text-center"><strong>Lieu :</strong> <span th:text="${event.location}">Tunis</span></p>
+          <hr>
+          <p class="card-text" th:text="${event.description}">
+            Description de l'événement ici...
+          </p>
+          <hr>
+          <!-- Bouton pour participer -->
+          <form th:action="@{'/events/' + ${event.id} + '/register'}" method="post" class="d-grid">
+            <button type="submit" class="btn btn-success btn-lg">Participate in this event</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton pour revenir à la liste des événements -->
+  <div class="text-center mt-4">
+    <a href="/home" class="btn btn-secondary">Back to events</a>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script></body>
+</html>
